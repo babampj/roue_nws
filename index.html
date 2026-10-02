@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Roue NWS</title>
+    <link rel="stylesheet" href="jeu_de_roue.css">
+</head>
+<body>
+
+<header class="header">
+    <img src="logo_nws.jpg" alt="Logo Normandie Web School" class="logo">
+    <h1 class="header-title">LA ROUE NWS</h1>
+    <div class="score">Score : <span id="score">0</span></div>
+</header>
+
+<main class="game">
+
+    <section class="email-card" id="emailCard">
+        <p class="mini-title">NORMANDIE WEB SCHOOL</p>
+        <h2>ENTRE TON <span>EMAIL</span></h2>
+        <p>
+            Ton adresse email permet de conserver tes tentatives et ton score.
+            Tu disposes de 3 tours toutes les 24 heures.
+        </p>
+
+        <form id="emailForm">
+            <input type="email" id="emailInput" placeholder="ton@email.com" required autocomplete="email">
+            <button type="submit" id="sendCodeButton">RECEVOIR MON CODE</button>
+        </form>
+
+        <p id="emailMessage"></p>
+
+        <div id="codeVerification" class="code-verification hidden">
+            <div class="code-separator"></div>
+            <h3>VÉRIFIE TON EMAIL</h3>
+            <p>Un code à 6 chiffres vient de t'être envoyé.</p>
+
+            <form id="codeForm">
+                <input type="text" id="codeInput" placeholder="123456" inputmode="numeric"
+                       maxlength="6" autocomplete="one-time-code" required>
+                <button type="submit" id="verifyCodeButton">VALIDER LE CODE</button>
+            </form>
+
+            <p id="codeMessage"></p>
+
+            <button type="button" id="newCodeButton" class="new-code-button">
+                RECEVOIR UN NOUVEAU CODE
+            </button>
+        </div>
+    </section>
+
+    <div id="gameContent" class="game-content hidden">
+
+        <section class="intro" id="intro">
+            <p class="mini-title">NORMANDIE WEB SCHOOL</p>
+            <h2>TOURNE LA <span>ROUE !</span></h2>
+            <p>
+                Clique sur le bouton et découvre ton défi.
+                Tu as 10 secondes pour répondre à chaque question.
+            </p>
+            <div class="attempts">
+                Tours utilisés :
+                <strong><span id="attemptsUsed">0</span>/3</strong>
+            </div>
+        </section>
+
+        <div class="cards-container">
+
+            <div class="quiz" id="quiz">
+                <p class="quiz-category" id="quizCategory">QUESTION</p>
+
+                <div class="question-timer" id="questionTimer">
+                    Temps restant : <span id="questionTime">10</span>s
+                </div>
+
+                <h3 id="question"></h3>
+
+                <form id="quizForm">
+                    <label class="answer"><input type="radio" name="reponse" value="0"><span id="choix0"></span></label>
+                    <label class="answer"><input type="radio" name="reponse" value="1"><span id="choix1"></span></label>
+                    <label class="answer"><input type="radio" name="reponse" value="2"><span id="choix2"></span></label>
+                    <label class="answer"><input type="radio" name="reponse" value="3"><span id="choix3"></span></label>
+
+                    <button type="submit" class="validate-button">VALIDER MA RÉPONSE</button>
+                </form>
+
+                <p id="quizResult"></p>
+            </div>
+
+            <div class="special-card" id="specialCard">
+                <h3 id="specialTitle"></h3>
+                <p id="specialText"></p>
+                <button id="specialButton">CONTINUER</button>
+            </div>
+
+            <div class="risk-choice" id="riskChoice">
+                <p class="risk-title">DÉFI RISQUE</p>
+                <h3>Veux-tu prendre le risque ?</h3>
+                <p>Bonne réponse : <strong>+300 points</strong></p>
+                <p>Mauvaise réponse : <strong>-100 points</strong></p>
+                <div class="risk-buttons">
+                    <button id="acceptRisk">ACCEPTER LE RISQUE</button>
+                    <button id="refuseRisk">REFUSER</button>
+                </div>
+            </div>
+
+        </div>
+
+        <section class="wheel-zone" id="wheelZone">
+
+            <div class="wheel-wrapper">
+                <div class="pointer"></div>
+
+                <div class="wheel" id="wheel">
+                    <div class="wheel-text text1">Défi code</div>
+                    <div class="wheel-text text2">Défi créatif</div>
+                    <div class="wheel-text text3">Défi IA</div>
+                    <div class="wheel-text text4">Défi Marketing</div>
+                    <div class="wheel-text text5">Quiz NWS</div>
+                    <div class="wheel-text text6">Bonus</div>
+                    <div class="wheel-text text7">Risques</div>
+                    <div class="wheel-center">NWS</div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="spinButton">TOURNER LA ROUE</button>
+                <div class="result" id="result">Prêt à jouer ?</div>
+                <div class="remaining" id="remaining">Il te reste 3 tours.</div>
+            </div>
+
+        </section>
+
+        <section class="gift-shop" id="giftShop">
+
+            <div id="giftMessage"></div>
+
+            <p class="gift-small-title">FIN DE LA PARTIE</p>
+            <h2>CHOISIS TON CADEAU</h2>
+
+            <p>Tes 3 tours sont terminés. Tu peux maintenant choisir un seul cadeau.</p>
+
+            <p class="final-score">
+                Ton score :
+                <strong><span id="finalScore">0</span> points</strong>
+            </p>
+
+            <p>Tu peux sélectionner un cadeau dont le prix est inférieur ou égal à ton score.</p>
+
+            <div class="gift-list" id="giftList"></div>
+
+        </section>
+
+        <div class="blocked-card" id="blockedCard">
+            <h3>TES 3 TOURS SONT TERMINÉS</h3>
+            <p>Merci d'avoir participé !</p>
+            <p id="chosenGiftText"></p>
+            <p>Tu pourras rejouer dans :</p>
+            <strong id="countdown">24:00:00</strong>
+        </div>
+
+    </div>
+
+</main>
+
+<script src="jeu_de_roue.js"></script>
+
+</body>
+</html>
