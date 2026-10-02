@@ -1,0 +1,13 @@
+{
+    "name": "roue-nws",
+    "version": "1.0.0",
+    "description": "Jeu de roue Normandie Web School",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "express": "^5.1.0",
+        "nodemailer": "^7.0.0"
+    }
+}
