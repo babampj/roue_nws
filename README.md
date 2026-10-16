@@ -36,18 +36,34 @@ Jeu de roue de la Normandie Web School. Le joueur se connecte avec son email (co
 
 ## Structure du projet
 
+Le projet est organisé en deux parties : le **serveur** (Node.js, fait autorité sur le jeu) et le **client** (dossier `public`, affiché par le navigateur).
+
 ```
-roue-nws/
-├── server.js              Serveur Express (API, questions, scores, envoi d'emails)
-├── package.json           Dépendances et script de démarrage
-└── public/
-    ├── index.html         Page du jeu
-    ├── jeu_de_roue.css    Styles
-    ├── jeu_de_roue.js     Logique côté navigateur
-    └── logo_nws.jpg       Logo
+roue_nws/
+│
+├── server.js                 Serveur Express : API, questions, scores, sessions, emails
+├── package.json              Dépendances et script de démarrage (npm start)
+├── package-lock.json         Versions exactes des dépendances
+├── .gitattributes            Réglages Git (fins de ligne)
+├── README.md                Documentation du projet
+│
+└── public/                   Fichiers servis au navigateur (statiques)
+    ├── index.html            Structure de la page du jeu
+    ├── jeu_de_roue.css       Styles (roue, écrans, cadeaux)
+    ├── jeu_de_roue.js        Logique côté navigateur (affichage, appels API)
+    └── logo_nws.jpg          Logo NWS
 ```
 
-Le dossier `public` est servi automatiquement par le serveur.
+### Comment c'est structuré
+
+- **`server.js`** — cœur du jeu : définit les questions, les cadeaux, les segments de la roue, la logique de points et les routes `/auth/...` et `/api/...`. Les bonnes réponses n'existent que ici, jamais dans le navigateur.
+- **`public/`** — tout ce que le joueur voit. Le serveur le diffuse automatiquement via `express.static` : ouvre http://localhost:3000 et la page se charge.
+- **`public/jeu_de_roue.js`** — envoie les requêtes (`fetch`) aux routes du serveur et affiche le résultat (roue, questions, score, cadeaux).
+- **`package.json`** — décrit le projet et ses dépendances (Express, Nodemailer) ; `npm start` lance le serveur.
+
+### Règle à respecter
+
+Ne jamais ajouter de logique sensible (bonnes réponses, points, prix) dans `public/` : le navigateur peut tout lire. Tout se vérifie côté `server.js`.
 
 ## Installation
 
